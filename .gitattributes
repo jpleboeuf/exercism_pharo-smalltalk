@@ -1,0 +1,16 @@
+## Git: Checking-out and checking-in ##
+# ^ https://git-scm.com/docs/gitattributes#_eol
+# st files use LF as line-ending style:
+*.st eol=lf
+# Also, Bash needs LF, even on Windows:
+*.sh eol=lf
+
+## Git: Generating diff text ##
+# ^ https://git-scm.com/docs/gitattributes#_generating_diff_text
+# st files are always text, even if they contain invalid encoded chars:
+*.st text diff
+
+## Linguist: Classifying of Smalltalk files ##
+# ^ https://github.com/github/linguist#overrides
+# GitHub is unable to properly detect Smalltalk code, so help it a bit:
+*.st linguist-language=Smalltalk
