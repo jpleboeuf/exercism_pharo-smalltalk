@@ -23,8 +23,8 @@ Class {
 Isogram >> isIsogramPhrase: aPhrase [
 	"returns whether aPhrase is an isogram or not"
 
-	| aPhraseAlpha |
-	aPhraseAlpha := (aPhrase asUppercase) select: [:c | c isLetter ].
+	| aPhraseOnlyLetters |
+	aPhraseOnlyLetters := (aPhrase asUppercase) onlyLetters.
 
-	^ aPhraseAlpha size = (aPhraseAlpha asSet) size.
+	^ aPhraseOnlyLetters size = (aPhraseOnlyLetters asSet) size.
 ]
