@@ -32,8 +32,11 @@ Grains >> atSquare: aSquareIdx [
 	"returns the quantity of grains on a specific square of the chessboard"
 
 	|  |
-	(aSquareIdx between: 1 and: 64) ifFalse: [ Error signal: 'index of square must be between 1 and 64' ].
-	^ 2 raisedTo: (aSquareIdx - 1).
+	(aSquareIdx between: 1 and: 64)
+		ifFalse: [ Error signal: 'index of square must be between 1 and 64' ].
+	^ (aSquareIdx = 1)
+		ifTrue: [ 1 ]
+		ifFalse: [ 2 * (self atSquare: (aSquareIdx - 1)) ].
 ]
 
 { #category : #solving }
