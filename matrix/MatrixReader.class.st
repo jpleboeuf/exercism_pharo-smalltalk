@@ -27,33 +27,15 @@ matrixCalculator input: m atColumn: 2.
 Class {
 	#name : #MatrixReader,
 	#superclass : #Object,
-	#instVars : [
-		'matrix'
-	],
 	#category : #'Exercise@Matrix'
 }
-
-{ #category : #parsing }
-MatrixReader >> initMatrixFromString: aString [
-	"initializes the matrix instance variable with the matrix represented by the string aString"
-
-	| rows |
-	rows := aString substrings: (String cr).
-	matrix := Array new: (rows size).
-	rows doWithIndex: [:row :i |
-			| rowItems |
-			rowItems := row substrings: (String space).
-			matrix at: i put: (rowItems collect: [:each | each asInteger]).
-		].
-]
 
 { #category : #solving }
 MatrixReader >> input: aString atColumn: aColIdx [
 	"returns the column aColIdx from the matrix represented by the string aString"
 
 	|  |
-	self initMatrixFromString: aString.
-	^ matrix collect: [:row | row at: aColIdx ].
+	^ (self parseMatrixFromString: aString) collect: [:row | row at: aColIdx ].
 ]
 
 { #category : #solving }
@@ -61,6 +43,20 @@ MatrixReader >> input: aString atRow: aRowIdx [
 	"returns the row aRowIdx from the matrix represented by the string aString"
 
 	|  |
-	self initMatrixFromString: aString.
-	^ matrix at: aRowIdx.
+	^ (self parseMatrixFromString: aString) at: aRowIdx.
+]
+
+{ #category : #parsing }
+MatrixReader >> parseMatrixFromString: aString [
+	"returns the matrix (as an array of arrays) represented by the string aString"
+
+	| matrix rows |
+	rows := aString substrings: (String cr).
+	matrix := Array new: (rows size).
+	rows doWithIndex: [:row :i |
+			| rowItems |
+			rowItems := row substrings: (String space).
+			matrix at: i put: (rowItems collect: [:each | each asInteger]).
+		].
+	^ matrix.
 ]
