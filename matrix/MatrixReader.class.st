@@ -35,7 +35,7 @@ MatrixReader >> input: aString atColumn: aColIdx [
 	"returns the column aColIdx from the matrix represented by the string aString"
 
 	|  |
-	^ (self parseMatrixFromString: aString) collect: [ :row | row at: aColIdx ].
+	^ (self parseMatrixFromString: aString) atColumn: aColIdx.
 ]
 
 { #category : #solving }
@@ -43,18 +43,20 @@ MatrixReader >> input: aString atRow: aRowIdx [
 	"returns the row aRowIdx from the matrix represented by the string aString"
 
 	|  |
-	^ (self parseMatrixFromString: aString) at: aRowIdx.
+	^ (self parseMatrixFromString: aString) atRow: aRowIdx.
 ]
 
 { #category : #parsing }
 MatrixReader >> parseMatrixFromString: aString [
-	"returns the matrix (as an array of arrays) represented by the string aString"
+	"returns the matrix (as a 2D-array) represented by the string aString"
 
-	| rows |
+	| rows matrix |
 	rows := (aString substrings: (String cr))
 		collect: [ :row |
 				(row substrings: (String space))
 					collect: #asInteger
 			].
-	^ rows.
+	matrix := Array2D rows: (rows size) columns: ((rows at: 1) size).
+	1 to: (rows size) do: [ :i | matrix atRow: i put: (rows at: i) ].
+	^ matrix.
 ]
