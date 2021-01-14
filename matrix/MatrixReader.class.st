@@ -56,7 +56,7 @@ MatrixReader >> parseMatrixFromString: aString [
 	rows doWithIndex: [:row :i |
 			| rowItems |
 			rowItems := row substrings: (String space).
-			matrix at: i put: (rowItems collect: [:each | each asInteger]).
+			matrix at: i put: (rowItems collect: #asInteger).
 		].
 	^ matrix.
 ]
