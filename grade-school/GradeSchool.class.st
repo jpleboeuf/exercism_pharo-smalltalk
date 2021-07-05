@@ -53,7 +53,7 @@ GradeSchool >> desiredGrade: aGrade [
 	"returns a sorted list of all students enrolled in the given grade"
 
 	|  |
-	^ (students select: [ :s | s last = aGrade ]) collect: [ :s | s first ].
+	^ students select: [ :s | s last = aGrade ] thenCollect: #first.
 ]
 
 { #category : #initialization }
@@ -70,5 +70,5 @@ GradeSchool >> roster [
 	"returns a sorted list of all students in all grades"
 
 	|  |
-	^ students collect: [ :s | s first ].
+	^ students collect: #first.
 ]
