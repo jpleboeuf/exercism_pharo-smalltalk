@@ -44,11 +44,7 @@ GradeSchool >> addStudents: aStudentList [
 
 	|  |
 	students := students , aStudentList.
-	students sort: [ :s1 :s2 |
-			s1 last = s2 last
-				ifTrue: [ s1 first <= s2 first ]
-				ifFalse: [ s1 last < s2 last ]
-		].
+	students sort: #last ascending, #first ascending.
 
 ]
 
